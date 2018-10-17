@@ -1,4 +1,5 @@
 ﻿using NyTimesDisplay.DataAccess;
+using NyTimesDisplay.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,7 @@ namespace NyTimesDisplay
         /// </summary>
         public App()
         {
+            AutoMapperConfiguration.Configure();
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -41,8 +43,6 @@ namespace NyTimesDisplay
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
-
-            BooksApi.GetBooksByList("HARDCOVER FICTION");
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active

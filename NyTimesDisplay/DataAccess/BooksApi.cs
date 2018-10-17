@@ -10,11 +10,11 @@ namespace NyTimesDisplay.DataAccess
 {
     public static class BooksApi
     {
-        public static async Task<BooksResponseModel> GetBooksByList(string list)
+        public static async Task<List<Book>> GetBooksByList(string list)
         {
             Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient();
-
-            Uri requestUri = new Uri("https://api.nytimes.com/svc/books/v3/lists.json?api-key=3a4cca2238e24d139d271ad5d226637e&=&list=" + list.Replace(" ", "%20"));
+            var newListString = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=3a4cca2238e24d139d271ad5d226637e&=&list=" + string.Join("%20", list.Split(' '));
+            Uri requestUri = new Uri(newListString);
 
             Windows.Web.Http.HttpResponseMessage httpResponse = new Windows.Web.Http.HttpResponseMessage();
             string httpResponseBody = "";
@@ -26,7 +26,7 @@ namespace NyTimesDisplay.DataAccess
                 httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<BooksResponseModel>(httpResponseBody);
             
-                return result.Status == "OK" ? result : null;
+                return result.Status == "OK" ? result.Results : null;
             }
             catch (Exception ex)
             {

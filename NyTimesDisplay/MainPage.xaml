@@ -8,7 +8,77 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel>
+        <Grid Padding="40" Background="#4771BF" Margin="0, 0, 0, 20">
+            <TextBlock Text="NY TIMES BESTSELLERS" TextAlignment="Center" Foreground="White" FontSize="35" FontWeight="SemiBold"/>
+        </Grid>
+       
+        <Grid Height="700">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-    </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView SelectionMode="None" x:Name="CategoriesList" Width="400"
+                IsItemClickEnabled="True" 
+                ItemClick="LoadListAsync">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="Background" Value="#4771BF"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Margin" Value="20"/>
+                        <Setter Property="Padding" Value="20"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+
+            <Grid Grid.Column="1" Background="#4771BF" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100px"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Padding="10" Background="#F3B086" Margin="20">
+                    <TextBlock Text="BOOKS" TextAlignment="Center" Foreground="White" FontSize="30" FontWeight="SemiBold"/>
+                </Grid>
+                <ListView Grid.Row="1" SelectionMode="None" x:Name="BooksList" IsItemClickEnabled="True" Margin="20" Background="Pink" ItemClick="SelectBook">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Book_details[0].Title}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Margin" Value="20"/>
+                            <Setter Property="Padding" Value="20"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Grid>
+
+
+
+            <Grid Grid.Column="2" Background="#4771BF" Width="400" Margin="20">
+
+            </Grid>
+        </Grid>
+    </StackPanel>
+    
 </Page>
